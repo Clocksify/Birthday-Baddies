@@ -12,16 +12,6 @@ def zipfian_distribution(N):
 def uniform_distribution(N):
     return [1.0/N] * N
 
-def normal_distribution(N, mean=None, std=None):
-    if mean is None:
-        mean = (N - 1) / 2.0
-    if std is None:
-        std = N / 6.0
-    # unnormalised Gaussian pdf at each bin center i
-    weights = [math.exp(-((i - mean)**2) / (2 * std * std)) for i in range(N)]
-    total = sum(weights)
-    return [w/total for w in weights]
-
 def half_doubled_distribution(N):
     #first N/2 bins 2p, remaining bins p
     cutoff = N // 2
