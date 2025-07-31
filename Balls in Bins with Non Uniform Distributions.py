@@ -17,7 +17,7 @@ def normal_distribution(N, mean=None, std=None):
         mean = (N - 1) / 2.0
     if std is None:
         std = N / 6.0
-    # unnormalized Gaussian pdf at each bin center i
+    # unnormalised Gaussian pdf at each bin center i
     weights = [math.exp(-((i - mean)**2) / (2 * std * std)) for i in range(N)]
     total = sum(weights)
     return [w/total for w in weights]
@@ -26,6 +26,7 @@ def half_doubled_distribution(N):
     #first N/2 bins 2p, remaining bins p
     cutoff = N // 2
     weights = [2.0 if i < cutoff else 1 for i in range(N)]
+    #change the sign of i < cutoff to shift middle bin to 2p or p for odd N
     total = sum(weights)
     return [w/total for w in weights]
 
@@ -46,9 +47,9 @@ def run_experiment(distribution, q, attempts):
     return collisions / attempts
 
 if __name__ == "__main__":
-    N = 8                  
-    q = 2                   
-    attempts = 100000      
+    N = 365                  
+    q = 21                   
+    attempts = 1000000     
     distribution = half_doubled_distribution(N)
 
     collision_prob = run_experiment(distribution, q, attempts)
