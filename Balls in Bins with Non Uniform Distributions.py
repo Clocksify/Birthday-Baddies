@@ -22,7 +22,7 @@ def half_doubled_distribution(N):
     total = sum(weights)
     return [w/total for w in weights]
 
-def half_doubled_distribution_specific(N, heavy_bins=4):
+def half_doubled_distribution_specific(N, heavy_bins):
     #First `heavy_bins` bins get weight=2, the rest get weight=1.
     #starts from index 0 so first 4 bins is 0, 1, 2, 3
     #if heavy_bins is None, then use N // 2 as default (for odd number bins, this will not incdue the middle bin)
@@ -59,9 +59,9 @@ if __name__ == "__main__":
     N = 8   
     #count of number of bins, not maximum index   
     #setting N = 8 means bins are 0, 1, 2, 3, 4, 5, 6, 7 
-    q = 3            
+    q = 2            
     attempts = 1000000     
-    distribution = half_doubled_distribution_specific(N, heavy_bins=7)
+    distribution = half_doubled_distribution_specific(N, heavy_bins=5)
 
     collision_prob = run_experiment(distribution, q, attempts)
     print(f"Estimated collision probability (q={q}, N={N}) over {attempts} trials: {collision_prob:.6f}")
